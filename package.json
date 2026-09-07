@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/nirholas/flow-classifier.git"
