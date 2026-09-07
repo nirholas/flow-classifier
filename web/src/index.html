@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowClassifier: Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures</title>
+<meta name="description" content="Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.">
+<link rel="canonical" href="https://flow-classifier.pages.dev/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#07080b">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FlowClassifier">
+<meta property="og:title" content="FlowClassifier">
+<meta property="og:description" content="Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.">
+<meta property="og:url" content="https://flow-classifier.pages.dev/">
+<meta property="og:image" content="https://flow-classifier.pages.dev/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FlowClassifier">
+<meta name="twitter:description" content="Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.">
+<meta name="twitter:image" content="https://flow-classifier.pages.dev/og.png">
+
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" type="text/plain" title="For language models" href="/llms.txt">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"FlowClassifier","description":"Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.","url":"https://flow-classifier.pages.dev","codeRepository":"https://github.com/nirholas/flow-classifier","programmingLanguage":"Solidity","runtimePlatform":"Ethereum Virtual Machine","license":"https://opensource.org/licenses/MIT","keywords":"mev, public-good, analytics, order-flow, oracle-free","isPartOf":{"@type":"WebSite","name":"HookForge","url":"https://hookforge.pages.dev"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="brand" href="/">FlowClassifier</a>
+    <nav aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#using">Using it</a>
+      <a href="#deploy">Deploy</a>
+      <a href="https://github.com/nirholas/flow-classifier" rel="noopener">GitHub</a>
+      <a href="https://hookforge.pages.dev" rel="noopener">Catalogue</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="shell hero">
+    <p class="eyebrow">Uniswap v4 hook &middot; Order flow and MEV</p>
+    <h1>FlowClassifier</h1>
+    <p class="lede">Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.</p>
+    <div class="cta-row">
+      <a class="btn btn--primary" href="https://github.com/nirholas/flow-classifier" rel="noopener">Source on GitHub</a>
+      <a class="btn" href="#using">Use it in a pool</a>
+      <a class="btn" href="/hook.json">Manifest JSON</a>
+    </div>
+
+    <div class="scene">
+      <canvas data-permissions="{&quot;afterRemoveLiquidityReturnsDelta&quot;:false,&quot;afterAddLiquidityReturnsDelta&quot;:false,&quot;afterSwapReturnsDelta&quot;:false,&quot;beforeSwapReturnsDelta&quot;:false,&quot;afterDonate&quot;:false,&quot;beforeDonate&quot;:false,&quot;afterSwap&quot;:true,&quot;beforeSwap&quot;:true,&quot;afterRemoveLiquidity&quot;:false,&quot;beforeRemoveLiquidity&quot;:false,&quot;afterAddLiquidity&quot;:false,&quot;beforeAddLiquidity&quot;:false,&quot;afterInitialize&quot;:false,&quot;beforeInitialize&quot;:false}" aria-hidden="true"></canvas>
+      <p class="scene__fallback">FlowClassifier implements 2 of the fourteen Uniswap v4 callbacks: beforeSwap, afterSwap.</p>
+    </div>
+
+    <dl class="stats">
+      <div class="stat"><dt>Family</dt><dd>Order flow and MEV</dd></div>
+      <div class="stat"><dt>Callbacks</dt><dd>2 of 14</dd></div>
+      <div class="stat"><dt>Fee</dt><dd>static</dd></div>
+      <div class="stat"><dt>Admin keys</dt><dd>none</dd></div>
+      <div class="stat"><dt>Licence</dt><dd>MIT</dd></div>
+    </dl>
+  </section>
+
+  <section class="shell">
+    <h2 id="how">How it works</h2>
+      <p>Almost every fee mechanism in this catalogue is a guess about who is trading. The staleness tax guesses from elapsed time. The priority-fee tax guesses from what a trade bid for its position.</p>
+      <p>Each one re-derives the same hidden quantity privately, none of them publishes it, and no two of them agree. The quantity they are all reaching for has a clean on-chain signature. Arbitrage arrives first in its block, because being second is worthless when the whole trade is closing a gap somebody else can close instead.</p>
+      <p>Ordinary flow does not care where in a block it lands. So the split between swaps that led their block and swaps that followed one is a measurable proxy for the split between informed and uninformed flow, and the ratio of how far each population moves the price is a measure of how expensive the informed half is. This hook counts both and publishes them through {IFlowStats}: - `leadShareBps`: the fraction of swaps that were first in their block.</p>
+      <p>- `leadImpactRatioBps`: how much further the average leading swap moves the price than the average following one. `10_000` means they move it equally. A pool being arbitraged reads well above that.</p>
+      <p>The point is that it is a public good rather than a mechanism. It sets no fee, returns no delta, takes no payment and rejects nothing; a test asserts that a swap through a measured pool receives exactly what the same swap through an identical unhooked pool receives. Other hooks can price from it, routers can prefer pools whose flow is cheap to fill, providers can decide whether a pool is worth quoting, and indexers can rank pools by something more meaningful than volume.</p>
+      <p>Counters saturate rather than wrap. A wrapped counter reports a small number where a huge one belongs and every ratio derived from it becomes quietly wrong; a saturated one stops moving and keeps the last true value, which is a failure a reader can notice.</p>
+
+    <div class="callout callout--prior"><h3>Prior art</h3><p>Off-chain, order-flow toxicity is standard: VPIN, markout, and the lead-lag analysis every market maker runs on its own fills. On-chain, hooks consume such signals privately to set a fee. Publishing the measurement itself, from a hook that deliberately does nothing else, so that every other contract can read one pool's flow quality instead of each guessing at it, is the contribution here.</p></div>
+    <div class="callout callout--warn"><h3>Where it does not help</h3><p>First-in-block is a proxy, not a fact. A private-mempool arbitrage that lands second still leads economically, and an ordinary swap that happens to be first is counted as leading. The measure is meaningful in aggregate over many blocks and says nothing reliable about any single swap.</p>
+      <p>On a chain with sub-second blocks where most blocks hold one swap, nearly everything leads and the ratio degenerates.</p></div>
+
+    <h2 id="using">Using it</h2>
+    <p>
+      Uniswap v4 removed <code>hookData</code> from <code>initialize</code>, so per-pool parameters arrive out of band.
+      Fix them for a pool key whose pool does not exist yet, then initialize. Nobody can change them afterwards,
+      including you.
+    </p>
+    <pre><code>poolManager.initialize(key, startingSqrtPriceX96);</code></pre>
+    
+
+    <h3>Parameters</h3>
+    <p>This hook takes no per-pool configuration.</p>
+
+    <h3>From TypeScript</h3>
+    <pre><code>npm i @hookforge/sdk
+
+import {getHook, hookAddress, poolKeyFor} from "@hookforge/sdk";
+
+const hook = getHook("flow-classifier");
+const key  = poolKeyFor({
+  hook: hookAddress("flow-classifier", 8453),   // Base
+  currencyA: USDC, currencyB: WETH,
+  tickSpacing: 60,
+});</code></pre>
+
+    
+
+    <h2>The callbacks it claims</h2>
+    <p>
+      Uniswap v4 reads a hook's permissions from the low fourteen bits of its own address, which is why deploying one
+      means mining a CREATE2 salt. This hook claims 2, so every deployment of it has an address ending
+      in <code>0xc0</code>.
+    </p>
+    <ul class="flags"><li class="flag">beforeInitialize</li><li class="flag">afterInitialize</li><li class="flag">beforeAddLiquidity</li><li class="flag">afterAddLiquidity</li><li class="flag">beforeRemoveLiquidity</li><li class="flag">afterRemoveLiquidity</li><li class="flag flag--on">beforeSwap</li><li class="flag flag--on">afterSwap</li><li class="flag">beforeDonate</li><li class="flag">afterDonate</li><li class="flag">beforeSwapReturnsDelta</li><li class="flag">afterSwapReturnsDelta</li><li class="flag">afterAddLiquidityReturnsDelta</li><li class="flag">afterRemoveLiquidityReturnsDelta</li></ul>
+
+    <h2>It says what it is, on-chain</h2>
+    <p>
+      Nothing about a hook's address tells an indexer, a wallet, a router or an agent what the pool does, which is why
+      hook discovery today is a curated list. This hook answers for itself, in one <code>eth_call</code>, with no
+      registry in the loop.
+    </p>
+    <pre><code>cast call $HOOK "hookName()(string)"    # FlowClassifier
+cast call $HOOK "specURI()(string)"     # https://flow-classifier.pages.dev/hook.json
+cast call $HOOK "hookTags()(string[])"  # mev, public-good, analytics, order-flow, oracle-free</code></pre>
+
+    <h2 id="deploy">Build, test and deploy</h2>
+    <pre><code>git clone --recurse-submodules https://github.com/nirholas/flow-classifier
+cd flow-classifier
+forge build &amp;&amp; forge test
+
+# Dry run: mines the salt, prints the address, sends nothing.
+forge script script/Deploy.s.sol --rpc-url $RPC_URL
+
+# For real.
+forge script script/Deploy.s.sol --rpc-url $RPC_URL --broadcast --verify</code></pre>
+
+    <div class="callout callout--warn">
+      <h3>Status</h3>
+      <p>
+        <strong>Unaudited.</strong> Built to an audited shape, on OpenZeppelin's audited hook bases, and tested against
+        a real <code>PoolManager</code>. No third party has reviewed it. Read "where it does not help" above before
+        putting money behind it. Not affiliated with Uniswap Labs.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <p>
+      <a href="https://github.com/nirholas/flow-classifier" rel="noopener">Source</a> &middot;
+      <a href="/hook.json">Manifest</a> &middot;
+      <a href="/llms.txt">llms.txt</a> &middot;
+      <a href="https://hookforge.pages.dev" rel="noopener">The rest of the catalogue</a>
+    </p>
+    <p>MIT licensed. Not affiliated with Uniswap Labs.</p>
+  </div>
+</footer>
+<script type="module" src="/assets/scene.js"></script>
+</body>
+</html>
