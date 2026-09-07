@@ -147,6 +147,40 @@ forge script script/Deploy.s.sol --rpc-url $RPC_URL --broadcast --verify</code><
       </p>
     </div>
   </section>
+
+  <section class="shell">
+    <h2 id="try">Try it</h2>
+    <p>
+      This is the hook running, not a picture of it. Connect a wallet on a chain it is deployed to, or bring the whole
+      stack up locally in one command and use it with no funds and no wallet risk at all.
+    </p>
+    <div class="demo" data-demo="flow-classifier">
+      <div class="panel panel--empty">
+        <p>Loading the demo… if this does not change, JavaScript is blocked and the demo cannot run.</p>
+      </div>
+    </div>
+    <details class="raw">
+      <summary>Run the whole thing locally</summary>
+      <pre><code>git clone --recurse-submodules https://github.com/nirholas/flow-classifier
+cd flow-classifier
+
+anvil &amp;
+forge script script/DeployLocal.s.sol --rpc-url http://127.0.0.1:8545 --broadcast \
+  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+
+node web/build.mjs &amp;&amp; npx serve web/dist</code></pre>
+      <p class="muted">
+        The deploy script writes <code>web/local.json</code> itself and the build merges it, so the page points at the
+        chain you just created without you editing anything. Point a wallet at
+        <code>http://127.0.0.1:8545</code> and every button on this page works.
+      </p>
+      <p class="muted">
+        Anvil's first account is pre-funded and its key is public by design. Never use it anywhere real.
+      </p>
+    </details>
+  </section>
+  <script type="application/json" id="deployments">{"chains":{},"errors":[{"type":"error","name":"HookNotImplemented","inputs":[]},{"type":"error","name":"InvalidPool","inputs":[]},{"type":"error","name":"NotPoolManager","inputs":[]}],"demo":{"panel":"guard","title":"What this pool's flow is actually made of","lede":"The hook counts how many swaps arrive first in their block and how far each population moves the price, and publishes both. It changes nothing about the pool it measures.","calls":[{"name":"leadShareBps","outputs":["uint256"],"reads":[{"label":"Swaps that led their block","format":"bps"}]},{"name":"leadImpactRatioBps","outputs":["uint256"],"reads":[{"label":"Lead impact ratio (10000 = equal)","format":"raw"}]},{"name":"flowStats","outputs":["uint256","uint256","uint256","uint256"],"reads":[{"index":0,"label":"Swaps seen","format":"raw"},{"index":1,"label":"Of those, leading","format":"raw"}]}],"tryLabel":"Swap and watch the numbers move","tryOtherLabel":"Swap the other way","localDeploy":{"flags":"Hooks.BEFORE_SWAP_FLAG | Hooks.AFTER_SWAP_FLAG","config":null,"noConfigure":true,"dynamicFee":false}}}</script>
+  <script type="module" src="/assets/demo.js"></script>
 </main>
 
 <footer class="foot">
