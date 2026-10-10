@@ -1,5 +1,10 @@
 # FlowClassifier
 
+<!-- three.ws:badges -->
+[![GitHub stars](https://img.shields.io/github/stars/nirholas/flow-classifier?style=flat&logo=github)](https://github.com/nirholas/flow-classifier/stargazers) [![License](https://img.shields.io/github/license/nirholas/flow-classifier?style=flat)](https://github.com/nirholas/flow-classifier/blob/HEAD/LICENSE) [![Last commit](https://img.shields.io/github/last-commit/nirholas/flow-classifier?style=flat)](https://github.com/nirholas/flow-classifier/commits) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat)](https://github.com/nirholas/flow-classifier/pulls) [![AI agent friendly](https://img.shields.io/badge/AI%20agents-AGENTS.md%20%2B%20llms.txt-6d5dfc?style=flat)](https://github.com/nirholas/flow-classifier/blob/HEAD/AGENTS.md)
+<!-- /three.ws:badges -->
+
+
 **Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.**
 
 A production Uniswap v4 hook. It holds no funds and takes no fee for itself. No owner, no pause switch, no upgrade path.
@@ -101,3 +106,26 @@ Not affiliated with Uniswap Labs.
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=nirholas/flow-classifier&type=Date)](https://www.star-history.com/#nirholas/flow-classifier&Date)
+
+<!-- three.ws:growth -->
+## Support the project
+
+If flow-classifier saves you time, **[star it on GitHub](https://github.com/nirholas/flow-classifier)**. Stars are how other developers and AI agents find the repositories worth trusting, and they cost you one click.
+
+Know someone who would use it? [Post on X](https://twitter.com/intent/tweet?text=flow-classifier%3A%20Publishes%2C%20on-chain%2C%20how%20much%20of%20a%20pool's%20order%20flow%20arrives%20first%20in%20the%20block%20and%20how%20far%20it&url=https%3A%2F%2Fgithub.com%2Fnirholas%2Fflow-classifier) · [Share on Bluesky](https://bsky.app/intent/compose?text=flow-classifier%3A%20Publishes%2C%20on-chain%2C%20how%20much%20of%20a%20pool's%20order%20flow%20arrives%20first%20in%20the%20block%20and%20how%20far%20it%20https%3A%2F%2Fgithub.com%2Fnirholas%2Fflow-classifier) · [Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fnirholas%2Fflow-classifier) · [Submit to Hacker News](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fgithub.com%2Fnirholas%2Fflow-classifier&t=flow-classifier%3A%20Publishes%2C%20on-chain%2C%20how%20much%20of%20a%20pool's%20order%20flow%20arrives%20first%20in%20the%20block%20and%20how%20far%20it) · [Share on Reddit](https://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fnirholas%2Fflow-classifier&title=flow-classifier%3A%20Publishes%2C%20on-chain%2C%20how%20much%20of%20a%20pool's%20order%20flow%20arrives%20first%20in%20the%20block%20and%20how%20far%20it)
+
+## Built for AI agents too
+
+Coding agents and LLM tooling can read this repo directly: [AGENTS.md](./AGENTS.md), [llms.txt](./llms.txt), [llms-full.txt](./llms-full.txt). Point an agent at `https://github.com/nirholas/flow-classifier` and it has the context it needs.
+
+## More from the same author
+
+- [All repositories by nirholas](https://github.com/nirholas/nirholas#readme): the full catalog, grouped by topic
+- [three.ws](https://three.ws): the platform for 3D AI agents with Solana wallets, a skill marketplace and x402 payments
+- Questions or ideas: [open an issue](https://github.com/nirholas/flow-classifier/issues) or [start a discussion](https://github.com/nirholas/flow-classifier/discussions)
+
+## Contributors
+
+[![Contributors](https://contrib.rocks/image?repo=nirholas/flow-classifier)](https://github.com/nirholas/flow-classifier/graphs/contributors)
+
+<!-- /three.ws:growth -->

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "flow-classifier"
+abstract: "Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures."
+license: Apache-2.0
+repository-code: "https://github.com/nirholas/flow-classifier"
+url: "https://three.ws"
+authors:
+  - name: three.ws
+    website: "https://three.ws"

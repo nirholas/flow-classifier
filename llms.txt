@@ -1,0 +1,28 @@
+# flow-classifier
+
+> Publishes, on-chain, how much of a pool's order flow arrives first in the block and how far it moves the price when it does. It changes nothing about the pool it measures.
+
+flow-classifier is an open-source repository by nirholas, part of the three.ws ecosystem.
+
+## Docs
+
+- [README](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md): install, usage and reference
+- [How it works](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#how-it-works)
+- [Prior art](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#prior-art)
+- [Where it does not help](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#where-it-does-not-help)
+- [Using it](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#using-it)
+- [The callbacks it claims](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#the-callbacks-it-claims)
+- [It says what it is, on-chain](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#it-says-what-it-is-on-chain)
+- [Build and test](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#build-and-test)
+- [Deploy](https://github.com/nirholas/flow-classifier/blob/HEAD/README.md#deploy)
+- [AGENTS.md](https://github.com/nirholas/flow-classifier/blob/HEAD/AGENTS.md): guidance for coding agents
+- [Full text for LLMs](https://github.com/nirholas/flow-classifier/blob/HEAD/llms-full.txt): the README inlined
+
+## Project
+
+- [Source](https://github.com/nirholas/flow-classifier)
+- [Issues](https://github.com/nirholas/flow-classifier/issues)
+- [Discussions](https://github.com/nirholas/flow-classifier/discussions)
+- [Homepage](https://flow-classifier.pages.dev)
+- [three.ws](https://three.ws): the platform this is part of
+- [All repositories by nirholas](https://github.com/nirholas/nirholas#readme)
