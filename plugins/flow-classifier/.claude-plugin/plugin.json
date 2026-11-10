@@ -6,6 +6,7 @@
     "name": "nirholas"
   },
   "repository": "https://github.com/nirholas/flow-classifier",
+  "homepage": "https://flow-classifier.pages.dev",
   "license": "Apache-2.0",
   "keywords": [
     "uniswap-v4",
@@ -15,6 +16,5 @@
     "mev",
     "public-good",
     "analytics"
-  ],
-  "homepage": "https://flow-classifier.pages.dev"
+  ]
 }
