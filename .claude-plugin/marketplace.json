@@ -1,0 +1,23 @@
+{
+  "name": "flow-classifier",
+  "owner": {
+    "name": "nirholas"
+  },
+  "description": "FlowClassifierHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+  "plugins": [
+    {
+      "name": "flow-classifier",
+      "source": "./",
+      "description": "FlowClassifierHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+      "tags": [
+        "uniswap-v4",
+        "hooks",
+        "solidity",
+        "foundry",
+        "mev",
+        "public-good",
+        "analytics"
+      ]
+    }
+  ]
+}

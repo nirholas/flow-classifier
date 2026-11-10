@@ -1,0 +1,20 @@
+{
+  "name": "flow-classifier",
+  "version": "1.0.0",
+  "description": "FlowClassifierHook Uniswap v4 hook: build, test, configure and deploy it with a mined CREATE2 salt.",
+  "author": {
+    "name": "nirholas"
+  },
+  "repository": "https://github.com/nirholas/flow-classifier",
+  "license": "Apache-2.0",
+  "keywords": [
+    "uniswap-v4",
+    "hooks",
+    "solidity",
+    "foundry",
+    "mev",
+    "public-good",
+    "analytics"
+  ],
+  "homepage": "https://flow-classifier.pages.dev"
+}
